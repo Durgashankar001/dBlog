@@ -4,7 +4,10 @@ const User = require("../Models/user.model")
 const jwt  = require("jsonwebtoken")
 const dotenv = require("dotenv")
 dotenv.config("./.env")
-const key = process.env.SECRET_KEY
+const token_key = process.env.SECRET_KEY
+const token_valid = process.env.TOKEN_VALID_TIME
+const refresh_valid_time = process.env.REFRESH_TOKEN_VALID_TIME
+const refresh_token_key = process.env.REFRESH_TOKEN_KEY
 
 userRouter.post("/signup",async(req,res)=>{
     const {email} = req.body
@@ -26,14 +29,50 @@ userRouter.post("/login",async(req,res)=>{
         const user = await User.findOne({email:email,password:password})
         if(user){
           const token = jwt.sign(
-                {id:user._id,email:user.email,role:user.role},key,
+                {id:user._id,email:user.email,role:user.role},token_key,
                 {
-                    expiresIn:"2 hour"
+                    expiresIn:token_valid
                 }
             )
-            res.status(200).send({message:"login successfull",token})
+            const refresh_token = jwt.sign(
+                {
+                    id:user._id,email:user.email,role:user.role
+                },refresh_token_key,
+                {
+                    expiresIn:refresh_valid_time
+                }
+            )
+            const response = {
+                message:"login successfull",
+                token:token,
+                refresh_token:refresh_token
+            }
+           return res.status(200).send(response)
         }
+       
         return res.status(401).send({message:"No account registered with this creadentials"})
+    }catch(e){
+        return res.status(500).send({message:"Something went worng please try after sometimes",e})
+    }
+})
+
+userRouter.post("/refresh",async(req,res)=>{
+    const refresh_token = req.headers["x-authorization"]
+    try{
+        const user = jwt.verify(refresh_token,refresh_token_key)
+        
+        const token = jwt.sign({
+            id:user.Id,email:user.email,role:user.role
+        },token_key,{
+            expiresIn:token_valid
+        })
+        const response = {
+            message:"login successfull",
+            token:token,
+            refresh_token:refresh_token
+        }
+       return res.status(200).send(response)
+
     }catch(e){
         return res.status(500).send({message:"Something went worng please try after sometimes",e})
     }
