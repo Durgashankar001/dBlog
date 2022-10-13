@@ -17,7 +17,7 @@ userRouter.post("/signup",async(req,res)=>{
             return res.status(403).send({message:"User is already exist in the server"})
         }
         const create_newUser = await User.create(req.body)
-        return res.status(200).send({message:"user created successfully"})
+        return res.status(200).send({message:"user created successfully",user:create_newUser})
     }catch(e){
         return res.status(500).send({message:e.message})
     }   
@@ -60,7 +60,7 @@ userRouter.post("/refresh",async(req,res)=>{
     const refresh_token = req.headers["x-authorization"]
     try{
         const user = jwt.verify(refresh_token,refresh_token_key)
-        
+
         const token = jwt.sign({
             id:user.Id,email:user.email,role:user.role
         },token_key,{
