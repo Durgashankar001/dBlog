@@ -1,6 +1,9 @@
 const mongoose = require("mongoose")
+const dotenv = require("dotenv")
+dotenv.config("./.env")
+const url = process.env.DB_URL
 
 const connect =()=>{
-    return mongoose.connect("mongodb://127.0.0.1:27017/dBlog")
+    return mongoose.connect(url)
 }
 module.exports = connect
