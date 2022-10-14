@@ -78,4 +78,8 @@ userRouter.post("/refresh",async(req,res)=>{
     }
 })
 
+userRouter.get("/github/callback",async(req,res)=>{
+    console.log(req.query.code)
+})
+
 module.exports = userRouter
