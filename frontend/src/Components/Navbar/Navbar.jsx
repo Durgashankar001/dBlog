@@ -101,7 +101,7 @@ const Navbar = () => {
                             px={7}
                             py={2}
                         >
-                            <RouterLink to={"/signup"}>Get started</RouterLink>
+                            <RouterLink to={"/login"}>Get started</RouterLink>
                         </Button>
                     </Flex>
                 </Flex>
