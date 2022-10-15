@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Fuzzy+Bubbles&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,600&family=Rubik+Microbe&family=Rubik+Moonrocks&family=Ubuntu+Condensed&display=swap');
+/* font-family: 'Fuzzy Bubbles', cursive;
+font-family: 'Poppins', sans-serif;
+font-family: 'Rubik Microbe', cursive;
+font-family: 'Rubik Moonrocks', cursive;
+font-family: 'Ubuntu Condensed', sans-serif; */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
