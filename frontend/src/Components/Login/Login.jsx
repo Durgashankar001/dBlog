@@ -20,7 +20,7 @@ const Login = () => {
                         <input type="email" placeholder='Enter Your Email' name="email" />
                         {/* <label htmlFor="">Password</label> */}
                         <input type="password" placeholder='Enter Your Password' name="password" />
-                        <button type="submit">Login</button>
+                        <button type="submit">signup</button>
                     </form>
                     <p style={{ "textAlign": "right", "fontSize": "0.8rem", "cursor": "pointer", "color": "blue" }}>(Forgot Password)</p>
                 </div>
