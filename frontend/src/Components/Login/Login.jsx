@@ -1,15 +1,22 @@
-import { Divider } from '@chakra-ui/react'
+import { Divider, useToast } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import "./Login.css"
 import { FcGoogle } from "react-icons/fc"
 import { BsGithub } from "react-icons/bs"
 import { FaFacebookSquare } from "react-icons/fa"
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { signIn } from '../../store/Auth/Auth.action'
 const intialState = {
     email: "",
     password: ""
 }
 
 const Login = () => {
+    const allState = useSelector((state) => state.authReducer)
+    const dispatch = useDispatch()
+    const toast = useToast()
+    const navigate = useNavigate()
     const [user, setUser] = useState(intialState)
     const handleChange = (e) =>{
         const {name:key,value} = e.target
@@ -18,13 +25,29 @@ const Login = () => {
             [key]:value
         })
     }
-    console.log(user)
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if (user.email == "" || user.password == "") {
+            return (
+                toast({
+                    title: "Please fill all the fields",
+                    status: "warning",
+                    position: "top",
+                    duration: 5000,
+                    isClosable: true,
+                })
+            )
+        }
+        dispatch(signIn(user,toast,navigate))
+        setUser(intialState)
+    }
+    
     return (
         <div className='login'>
             <div className='login_div'>
                 <h1 style={{ "textAlign": "center" }}>Login</h1>
                 <div className='login_inner'>
-                    <form action="">
+                    <form action="" onSubmit={handleSubmit}>
                         {/* <label htmlFor="">Name</label> */}
                         {/* <input type="text" placeholder='Enter Your Name' name="name" /> */}
                         {/* <label htmlFor="">Age</label> */}

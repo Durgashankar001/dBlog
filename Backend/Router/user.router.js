@@ -10,23 +10,23 @@ const refresh_valid_time = process.env.REFRESH_TOKEN_VALID_TIME
 const refresh_token_key = process.env.REFRESH_TOKEN_KEY
 
 userRouter.post("/signup",async(req,res)=>{
-    const {email} = req.body
+    const {email} = req.body.data
     try{
         const existing_user = await User.findOne({email})
         if(existing_user){
             return res.status(403).send({message:"User is already exist in the server"})
         }
-        const create_newUser = await User.create(req.body)
-        return res.status(200).send({message:"user created successfully",user:create_newUser})
+        const create_newUser = await User.create(req.body.data)
+        return res.status(200).send({message:"Account created successfully",user:create_newUser})
     }catch(e){
         return res.status(500).send({message:e.message})
     }   
 })
 
 userRouter.post("/login",async(req,res)=>{
-    const {email,password} = req.body
+    const {email,password} = req.body.data
     try{
-        const user = await User.findOne({email:email,password:password})
+        const user = await User.findOne({email,password})
         if(user){
           const token = jwt.sign(
                 {id:user._id,email:user.email,role:user.role},token_key,
@@ -44,6 +44,11 @@ userRouter.post("/login",async(req,res)=>{
             )
             const response = {
                 message:"login successfull",
+                userDetails:{
+                    name:user.name,
+                    age:user.age,
+                    role:user.role
+                },
                 token:token,
                 refresh_token:refresh_token
             }

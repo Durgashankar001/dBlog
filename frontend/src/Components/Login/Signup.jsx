@@ -4,6 +4,10 @@ import "./Login.css"
 import { FcGoogle } from "react-icons/fc"
 import { BsGithub } from "react-icons/bs"
 import { FaFacebookSquare } from "react-icons/fa"
+import { useDispatch, useSelector } from "react-redux"
+import { signUp } from '../../store/Auth/Auth.action'
+import { useToast } from "@chakra-ui/react"
+import { useNavigate } from 'react-router-dom'
 
 const intialState = {
     name: "",
@@ -14,6 +18,10 @@ const intialState = {
 
 const Signup = () => {
     const [user, setUser] = useState(intialState)
+    const allState = useSelector((state) => state.authReducer)
+    const dispatch = useDispatch()
+    const toast = useToast()
+    const navigate = useNavigate()
     const handleChange = (e) => {
         const { name: key, value } = e.target
         setUser({
@@ -22,13 +30,40 @@ const Signup = () => {
         }
         )
     }
-    console.log(user)
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        if (user.name == "" || user.age == "" || user.email == "" || user.password == "") {
+            return (
+                toast({
+                    title: "Please fill all the fields",
+                    status: "warning",
+                    position: "top",
+                    duration: 5000,
+                    isClosable: true,
+                })
+            )
+        }
+        if (user.password.length < 6) {
+            return (
+                toast({
+                    title: "Password must be six characters long",
+                    status: "warning",
+                    position: "top",
+                    duration: 5000,
+                    isClosable: true,
+                })
+            )
+        }
+        dispatch(signUp(user,toast,navigate))
+        setUser(intialState)
+    }
     return (
         <div className='login'>
             <div className='login_div'>
                 <h1 style={{ "textAlign": "center" }}>Sign up</h1>
                 <div className='login_inner'>
-                    <form action="">
+                    <form action="" onSubmit={handleSubmit}>
                         {/* <label htmlFor="">Name</label> */}
                         <input type="text" placeholder='Enter Your Name' name="name" value={user.name} onChange={handleChange} />
                         {/* <label htmlFor="">Age</label> */}
