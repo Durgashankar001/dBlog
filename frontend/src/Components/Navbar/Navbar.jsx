@@ -18,7 +18,7 @@ import { Link as RouterLink } from "react-router-dom";
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 
-const links = ["Our Story", "Membership","write"]
+const links = ["Our Story", "Membership", "write"]
 
 
 const Links = ({ children }) => (
@@ -42,8 +42,8 @@ const Navbar = () => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const [user, setUser] = useState(false)
     return (
-        <div style={{background:"black"}}>
-            <Box py={[1, 3]} px={[null, 20]}  border={"1px solid black"}>
+        <div style={{ background: "black",overflow:"hidden" }}>
+            <Box py={[1, 3]} px={[null, 20]} border={"1px solid black"}>
                 <Flex
                     h={[10, 10]}
                     className="navbar_flex"
@@ -60,12 +60,14 @@ const Navbar = () => {
                     <HStack spacing={8} className='navbar_flex_button'>
                         <Box>
                             <RouterLink to={"/"}>
-                                <Image src="C:\Users\Jyotirmaya\OneDrive\Desktop\Blogging\dBlog\frontend\src\Images\logo.jpeg"></Image>
+                                <Image w={"130px"} src="https://drive.google.com/uc?export=view&id=1CxqmZgZ33jH7zzGY2Bei1VINfyy4ew9l"></Image>
+                                {/* https://drive.google.com/file/d/1CxqmZgZ33jH7zzGY2Bei1VINfyy4ew9l/view?usp=sharing */}
+                                {/* https://drive.google.com/file/d/1ETsE2B5RzunxA5UhULpVaYBHBlyv9F1j/view?usp=sharing */}
                             </RouterLink>
                         </Box>
                     </HStack>
                     <Flex className='navbar_flex_button'>
-                    <HStack
+                        <HStack
                             as={"nav"}
                             spacing={4}
                             color={"white"}
@@ -81,9 +83,9 @@ const Navbar = () => {
                             size={["xs", "sm"]}
                             color={"white"}
                             mr={4}
-                            _hover={{cursor:"pointer"}}
+                            _hover={{ cursor: "pointer" }}
                         >
-                            {token ?  (
+                            {token ? (
                                 <RouterLink to={"/login"}>Sign out</RouterLink>
                             ) : (
                                 <RouterLink to={"/login"}>Sign in</RouterLink>
@@ -95,22 +97,22 @@ const Navbar = () => {
                             borderColor={"black"}
                             borderRadius={"md"}
                             bg={"linear-gradient(#fff,#ffff)"}
-                            _hover={{ color: "white", bg: "#0565ff",cursor:"pointer"}}
+                            _hover={{ color: "white", bg: "#0565ff", cursor: "pointer" }}
                             size={["xs", "sm"]}
                             mr={4}
                             px={7}
                             py={2}
                         >
-                            <RouterLink to={"/login"}>Get started</RouterLink>
+                            <RouterLink to={"/signup"}>Get started</RouterLink>
                         </Button>
                     </Flex>
                 </Flex>
 
                 {isOpen ? (
-                    <Box pb={4} display={{ md: "none" }}>
+                    <Box pt={10} pl={"12px"} color={"white"} display={{ md: "none" }}>
                         <Stack as={"nav"} spacing={4}>
                             {links.map((link) => (
-                                <Links key={link}>{link}</Links>
+                                <Links color={"white"} key={link}>{link}</Links>
                             ))}
                         </Stack>
                     </Box>

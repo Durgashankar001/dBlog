@@ -171,7 +171,7 @@
 .number_box h1{
     font-size: 2.5rem;
     font-weight: 600;
-    color: #e6e6e6;
+    color: #888686;
 }
 .details_box{
     width: 75%;
@@ -227,7 +227,8 @@
     margin-right: 10px;
 }
 .trending{
-    background: linear-gradient(#bf3890,#fff);
+    /* background: linear-gradient(#bf3890,#fff); */
+    background: linear-gradient(#da8cbf,#fff);
 }
 .body_part{
     display: flex;

@@ -2,6 +2,7 @@ import React from 'react'
 import { Route,Routes } from 'react-router-dom'
 import Homepage from '../Homepage/Homepage'
 import Login from '../Login/Login'
+import Signup from '../Login/Signup'
 import Navbar from '../Navbar/Navbar'
 
 const AllRouter = () => {
@@ -16,6 +17,11 @@ const AllRouter = () => {
         <>
         <Navbar/>
         <Login/>
+        </>} ></Route>
+        <Route path='/signup' element={
+        <>
+        <Navbar/>
+        <Signup/>
         </>} ></Route>
 
     </Routes>
