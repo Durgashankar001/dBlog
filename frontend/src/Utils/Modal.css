@@ -1,0 +1,35 @@
+.modal input{
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    outline: none;
+}
+.modal form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.modal p{
+    text-align: center;
+    font-size: 0.8rem;
+    color: black;
+    margin-bottom: 1rem;
+}
+.modal form input{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 400;
+    margin-right: 2px;
+}
+.modal form .first{
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+}
+.modal form .last{
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.modal .divider{
+    margin: 0px 5px;
+    font-weight: 600;
+}

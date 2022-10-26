@@ -38,7 +38,8 @@ export const signUp = (user,toast,navigate) => (dispatch) => {
                 age: age,
                 password: password
             }
-        }).then((res) => {
+        })
+        .then((res) => {
             dispatch(signup_succ(res.data))
             toast({
                 title: "Account created Successfully",

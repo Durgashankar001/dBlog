@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { signUp } from '../../store/Auth/Auth.action'
 import { useToast } from "@chakra-ui/react"
 import { useNavigate } from 'react-router-dom'
+import Modals from '../../Utils/Modal'
 
 const intialState = {
     name: "",
@@ -18,6 +19,7 @@ const intialState = {
 
 const Signup = () => {
     const [user, setUser] = useState(intialState)
+    const [isOpen, setIsOpen] = useState(false)
     const allState = useSelector((state) => state.authReducer)
     const dispatch = useDispatch()
     const toast = useToast()
@@ -29,6 +31,9 @@ const Signup = () => {
             [key]: value
         }
         )
+    }
+    const modalopen = () => {
+        setIsOpen(true)
     }
 
     const handleSubmit = async (e) => {
@@ -55,7 +60,8 @@ const Signup = () => {
                 })
             )
         }
-        dispatch(signUp(user,toast,navigate))
+        return modalopen()
+        dispatch(signUp(user, toast, navigate))
         setUser(intialState)
     }
     return (
@@ -87,7 +93,7 @@ const Signup = () => {
                     </div>
                     <p style={{ "textAlign": "center", "fontSize": "0.8rem", "cursor": "pointer", "color": "black", "marginTop": "20px", "width": "80%", "margin": "auto" }}>Click “Sign Up” to agree to dBlog's Terms of Service and acknowledge that dBlog’s Privacy Policy applies to you.</p>
                 </div>
-
+                <Modals isOpen={isOpen} setIsOpen={setIsOpen}/>
             </div>
         </div>
     )

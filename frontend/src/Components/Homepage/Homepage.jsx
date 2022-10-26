@@ -2,6 +2,7 @@ import { Box, Button, Divider, SimpleGrid, Stack, Text, Wrap, WrapItem } from '@
 import React from 'react'
 import './Homepage.css'
 import {FiTrendingUp} from "react-icons/fi"
+import { useNavigate } from 'react-router-dom'
 const trending_data =[
     {
         sl:"01",
@@ -36,6 +37,7 @@ const trending_data =[
 ]
 
 const Homepage = () => {
+    const navigate = useNavigate()
   return (
     <div>
         <div class="container">
@@ -44,7 +46,7 @@ const Homepage = () => {
           <h1>Help People To Explore <br />By Exploring Yourself</h1>
         </div>
         <div class="btn">
-          <button id="gr">Get Started</button>
+          <button id="gr" onClick={()=>navigate("/blogs")}>Get Started</button>
         </div>
       </div>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 319">
