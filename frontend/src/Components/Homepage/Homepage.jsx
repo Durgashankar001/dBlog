@@ -29,6 +29,7 @@ const trending_data =[
         name:"Durgashankr pal",
         des:"Hello this is my first blolg so i thik after reding this you gonna like my work"
     },
+    
     {
         sl:"06",
         name:"Durgashankr pal",
